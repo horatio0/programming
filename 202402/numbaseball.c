@@ -41,6 +41,7 @@ int main(){
         stba(n, in);
         if(win==1) break;
         count++;
+        if(count==10) printf("패배!\n%d\t%d\t%d\n", num[0], num[1], num[2]);
     }
     return 0;
 }
