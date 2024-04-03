@@ -18,6 +18,9 @@ int precedence(char op){
 }
 
 void toend(char sic[]){
+    init_stack_c();
+    init_stack_d();
+    result[0]='\0';
     int i = 0;
     while(sic[i]!='\0'){
         char c[2];
@@ -78,16 +81,43 @@ void cul(){
             push_d(a/b);
         }
     }
-    printf("수식 : %s = %1f\n\n", result, pop_d());
+    printf("수식결과 : ==> %f\n", pop_d());
+}
+
+int check(char a[]){
+    for (int i = 0; a[i]!='\0'; i++){
+        if(a[i]=='(' || a[i]=='{' || a[i]=='[') push_c(a[i]);
+        else if(a[i]==')' || a[i]=='}' || a[i]==']'){
+            if(is_c_empty()) return 2;
+            if((a[i]==')' && peek_c()!='(') || (a[i]=='}' && peek_c()!='{') || (a[i]==']' && peek_c()!='[')) return 3;
+            pop_c();
+        }
+    } 
+    if(!is_c_empty()) return 1;
+    else return 0;
 }
 
 int main(){
-    init_stack_c();
-    init_stack_d();
+    int iserr;
     char sic[1][50];
-    printf("\n STACK(Postfix수식 입력=>값출력) >> ");
-    scanf("%s", &sic);
-    toend(sic[0]);
-    cul();
+    while(1){
+        char sic[1][50];
+        printf("\n CALC(Infix수식입력) 'exit'입력시 종료 >> ");
+        scanf("%s", &sic);
+        if(strcmp(sic[0], "exit")==0){
+            printf("프로그램을 종료합니다");
+            exit(1);
+        }
+        init_stack_c();
+        init_stack_d();
+        iserr=check(sic[0]);
+        printf("입력수식 : %s", sic);
+        if(iserr==0) printf("\n");
+        else printf(" ==> 오류(조건%d 위반)\n", iserr);
+        toend(sic[0]);
+        printf("후위수식 : ==> %s\n", result);
+        cul();
+    }
+    
     return 0;
 }
