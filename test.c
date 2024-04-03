@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <malloc.h>
+#include <string.h>
 
 int main(){
-    char *a;
-    int b,i;
-    scanf("%d", &b);
-    a=(char*)malloc(sizeof(char)*b);
-    fgets(a,b,stdin);
-    for(i=0;i<=b;i++) printf("%c", a[i]);
+    char a[] = "hello ";
+    strcat(a, "world");
+    printf("%s", &a);
 }
