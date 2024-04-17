@@ -1,9 +1,15 @@
 #include <stdio.h>
-#include <malloc.h>
-#include <string.h>
 
 int main(){
-    char a[] = "hello ";
-    strcat(a, "world");
-    printf("%s", &a);
+    int h,m;
+    scanf("%d", &h);
+    scanf("%d", &m);
+    if (m<45){
+        h=h-1;
+        m=45-m;
+        m=60-m;
+    }else{
+        m=m-45;
+    }
+    printf("%dh %dm", h, m);
 }
