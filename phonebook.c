@@ -11,8 +11,8 @@ typedef struct {
 typedef struct{
 	int age;
 	char sex;
-	char rela[20];
-	char memo[100];
+	char rela[21];
+	char memo[101];
 } minfo;
 
 #include "TreeLinked.h"
